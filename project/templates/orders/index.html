@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Orders</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      tr:not(:last-child) {
+        border-bottom: 1px solid;
+      }
+      th,
+      td {
+        padding: 5px 10px;
+      }
+      th:not(:last-child),
+      td:not(:last-child) {
+        border-right: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Orders</h1>
+    <table>
+      <tr>
+        <th>amount</th>
+        <th>description</th>
+        <th>user</th>
+        <th>products</th>
+      </tr>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order.amount }}</td>
+        <td>{{ order.description }}</td>
+        <td>{{ order.user }}</td>
+        <td>
+          {% for product in order.products.all %}
+          <span>{{ product.name }}</span>{% if not forloop.last %}, {% endif %}
+          {% endfor%}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
